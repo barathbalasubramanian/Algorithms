@@ -193,7 +193,6 @@ class Graph:
 
 	def find(self, parent, i):
 		if parent[i] != i:
-	
 			parent[i] = self.find(parent, parent[i])
 		return parent[i]
 
@@ -271,7 +270,6 @@ class Graph():
 			if key[v] < min and mstSet[v] == False:
 				min = key[v]
 				min_index = v
-
 		return min_index
 
 	def primMST(self):
@@ -303,4 +301,44 @@ g.graph = [[0, 2, 0, 6, 0],
         [0, 5, 7, 9, 0]]
 
 g.primMST()
+
+
+''' Activity selection'''
+
+def printMaxActivities(s, f):
+	n = len(f)
+	print("Following activities are selected")
+	i = 0
+	print(i, end=' ')
+
+	for j in range(1, n):
+
+		if s[j] >= f[i]:
+			print(j, end=' ')
+			i = j
+
+s = [1, 3, 0, 5, 8, 5]
+f = [2, 4, 6, 7, 9, 9]
+
+printMaxActivities(s, f)
+
+''' Rod cutting problem '''
+
+INT_MIN = -32767
+
+def cutRod(price, n):
+	val = [0 for x in range(n + 1)]
+	val[0] = 0
+
+	for i in range(1, n + 1):
+		max_val = INT_MIN
+		for j in range(i):
+			max_val = max(max_val, price[j] + val[i-j-1])
+		val[i] = max_val
+
+	return val[n]
+
+arr = [1, 5, 8, 9, 10, 17, 17, 20]
+size = len(arr)
+print("Maximum Obtainable Value is " + str(cutRod(arr, size)))
 
